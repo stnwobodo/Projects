@@ -1,0 +1,277 @@
+{
+  "name": "My workflow 4",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1_2uzgtAqNZ5iuDcSlXB5A1lhSMt9nyEgmKTSWSb84mQ",
+          "mode": "list",
+          "cachedResultName": "NEWW",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_2uzgtAqNZ5iuDcSlXB5A1lhSMt9nyEgmKTSWSb84mQ/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1297811950,
+          "mode": "list",
+          "cachedResultName": "NEWW",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_2uzgtAqNZ5iuDcSlXB5A1lhSMt9nyEgmKTSWSb84mQ/edit#gid=1297811950"
+        },
+        "event": "rowAdded",
+        "options": {}
+      },
+      "id": "99df4ba3-cbe1-4eac-b0f9-dd5194a18a2c",
+      "name": "Google Sheets Trigger",
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        -176,
+        208
+      ],
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "p48WtA1YEdzUzltp",
+          "name": "Google Sheets Trigger account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "=Summarise the following spreadsheet row in plain language, highlighting the key themes:\n\n{{ JSON.stringify($json, null, 2) }}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "id": "6849ec2a-2593-44c2-9aef-6c144ba9a747",
+      "name": "Message a model",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.3,
+      "position": [
+        0,
+        208
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": null,
+          "name": "",
+          "__aiGatewayManaged": true
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "fromEmail": "stnwobodo@gmail.com",
+        "toEmail": "stnwobodo@gmail.com",
+        "subject": "Please review: AI summary",
+        "message": "=An AI summary is ready for your review:\n\n{{ $json.output[0].content[0].text }}\n\nApprove to confirm, or reject to send it back.",
+        "options": {}
+      },
+      "id": "adf442c2-a647-4029-9a05-76fd76e337ff",
+      "name": "Send an Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        272,
+        336
+      ],
+      "webhookId": "c7f94361-b246-4578-b5b9-ba7e539884aa",
+      "credentials": {
+        "smtp": {
+          "id": "iSyjVLWq6nxie9e2",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $('Message a model').all();\nlet rows = '';\nfor (let i = 0; i < items.length; i++) {\n  const out = items[i].json.output;\n  let text = '';\n  if (out && out[0] && out[0].content && out[0].content[0]) {\n    text = out[0].content[0].text || '';\n  }\n  rows += '<div style=\"margin-bottom:24px;\"><h2>Summary ' + (i + 1) + '</h2><p>' + String(text).split(String.fromCharCode(10)).join('<br>') + '</p></div>';\n}\nconst html = '<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>AI Summary Report</title>' +\n  '<style>body{font-family:Arial,Helvetica,sans-serif;color:#222;margin:40px;} h1{color:#1a1a1a;} h2{font-size:16px;color:#444;}</style>' +\n  '</head><body><h1>AI Summary Report</h1>' + rows + '</body></html>';\nreturn [{ json: { html: html } }];"
+      },
+      "id": "382aac2d-98a8-42a5-bd5c-4b10ef6220c4",
+      "name": "Build Report HTML",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        432,
+        208
+      ],
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "authentication": "apiKey",
+        "operation": "URL/HTML to PDF",
+        "convertType": "htmlToPDF",
+        "html": "={{ $json.html }}",
+        "advancedOptions": {
+          "name": "ai-summary-report.pdf"
+        }
+      },
+      "id": "5366694d-a791-4d00-a39f-99fb1ec1404f",
+      "name": "PDF.co",
+      "type": "n8n-nodes-pdfco.PDFco Api",
+      "typeVersion": 1.1,
+      "position": [
+        608,
+        32
+      ],
+      "executeOnce": true,
+      "credentials": {
+        "pdfcoApi": {
+          "id": null,
+          "name": "",
+          "__aiGatewayManaged": true
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "id": "82554c91-b76b-4c2f-9b18-0a1f726e626d",
+      "name": "Download PDF",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        736,
+        400
+      ],
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "fromEmail": "stnwobodo@gmail.com",
+        "toEmail": "stnwobodo@gmail.com",
+        "subject": "Your AI Summary Report",
+        "html": "Hi Stanley,<br><br>Your AI summary report is attached as a PDF.<br><br>Thanks.",
+        "options": {
+          "fileAttachments": "data"
+        }
+      },
+      "id": "84b3846e-d310-44a3-8de8-20f656511801",
+      "name": "Email PDF",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        944,
+        192
+      ],
+      "executeOnce": true,
+      "webhookId": "649cf344-8bba-44ec-9341-e6a7fa9acf0e",
+      "credentials": {
+        "smtp": {
+          "id": "iSyjVLWq6nxie9e2",
+          "name": "SMTP account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Send an Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send an Email": {
+      "main": [
+        [
+          {
+            "node": "Build Report HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Report HTML": {
+      "main": [
+        [
+          {
+            "node": "PDF.co",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PDF.co": {
+      "main": [
+        [
+          {
+            "node": "Download PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download PDF": {
+      "main": [
+        [
+          {
+            "node": "Email PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": true
+  },
+  "versionId": "3fa1ebc4-2ede-48ba-a0f6-9e185b9c288c",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e535218efb16c44e1893ef371d7911cdf1ce37aea9da5cc277751723b2b4989a"
+  },
+  "nodeGroups": [],
+  "id": "OOjhmTRkXW133Q1D",
+  "tags": []
+}
