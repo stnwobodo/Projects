@@ -1,0 +1,50 @@
+﻿"Monthly retail commodity sales (x 1,000) 1 2",,,,,
+Frequency: Monthly,,,,,
+Table: 20-10-0080-01,,,,,
+Release date: 2026-09-08,,,,,
+Geography: Canada,,,,,
+,,,,,
+,,,,,
+,,,,,
+Geography,Canada,,,,
+North American Product Classification System (NAPCS) Canada 2022 Version,Feb-26,Mar-26,Apr-26,May-26,Jun-26
+,Dollars,,,,
+"Total commodities, retail trade commissions and miscellaneous services","59,716,252A","70,067,715A","73,338,373A","79,927,499A","78,448,962A"
+Retail Services (except commissions)  [561],"58,285,057A","68,424,434A","71,446,723B","77,913,619B","76,500,493B"
+Food and beverages at retail  [56111],"15,251,624A","16,664,798A","16,439,135A","17,933,524A","17,351,361A"
+"Cannabis products, at retail  [56113]","439,053C","459,984A","490,789C","510,367A","517,761A"
+Clothing at retail  [56121],"2,383,444C","2,913,277C","3,087,506C","3,508,118C","3,559,803C"
+"Jewellery and watches, luggage and briefcases, at retail  [56123]","506,597C","521,627B","527,620B","636,682B","633,434B"
+Footwear at retail  [56124],"491,954C","671,733C","765,523C","877,930C","833,773C"
+"Home furniture, furnishings, housewares, appliances and electronics, at retail  [56131]","4,678,347B","5,523,699B","5,464,712B","5,870,352B","6,028,387B"
+"Sporting and leisure products (except publications, audio and video recordings, and game software), at retail  [56141]","1,041,949B","1,303,770B","1,409,692B","1,599,043B","1,709,376B"
+Publications at retail  [56142],"225,018C","236,403D","227,678B","242,195B","254,756C"
+"Audio and video recordings, and game software, at retail  [56143]","93,869C","105,744C","94,042C","97,343B","126,811B"
+Motor vehicles at retail  [56151],"12,471,742A","15,745,716A","16,755,581C","16,697,874C","16,821,105C"
+Recreational vehicles at retail  [56152],"690,273C","909,372C","1,152,446C","1,527,443C","1,460,215C"
+"Motor vehicle parts, accessories and supplies, at retail  [56153]","2,108,207A","2,451,972A","2,900,212C","2,829,765C","2,750,621C"
+"Automotive and household fuels, at retail  [56161]","5,109,853B","6,464,072B","6,724,298B","7,638,389C","6,985,933B"
+Home health products at retail  [56171],"5,046,983B","5,651,819B","5,585,634B","5,798,694B","5,742,826B"
+"Infant care, personal and beauty products, at retail  [56172]","1,563,296B","1,755,797B","1,846,491B","1,862,280B","1,899,858B"
+"Hardware, tools, and renovation and lawn and garden products, at retail  [56181]","3,207,328B","3,918,336B","4,922,161B","6,726,547B","6,397,821B"
+Miscellaneous products at retail  [56191],"2,975,521B","3,126,314B","3,053,202B","3,557,072B","3,426,652B"
+Retail trade commissions  [562] 3,"1,431,195B","1,643,281A","1,891,650C","2,013,880C","1,948,468C"
+,,,,,
+Symbol legend:,,,,,
+A, data quality: excellent,,,,
+B, data quality: very good,,,,
+C, data quality: good,,,,
+D, data quality: acceptable,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+Footnotes:,,,,,
+1,"The quality indicator is a measure of the coefficient of variation and may be adjusted to take into account the imputation rate. Quality indicator: Code A=Excellent (coefficient of variation less than or equal to 5%). Code B=Very good (coefficient of variation greater than 5%, but less than or equal to 10%). Code C=Good (coefficient of variation greater than 10%, but less than or equal to 16.5%). Code D=Fair (coefficient of variation greater than 16.5%, but less than or equal to 25%). Code E=Poor (coefficient of variation greater than 25%).",,,,
+2,This table replaces table 20-10-0017.,,,,
+3,Comprises the following North American Product Classification System (NAPCS): 56211.,,,,
+,,,,,
+,,,,,
+,,,,,
+"How to cite: Statistics Canada. Table 20-10-0080-01  Monthly retail commodity sales (x 1,000)",,,,,
+https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=2010008001,,,,,
